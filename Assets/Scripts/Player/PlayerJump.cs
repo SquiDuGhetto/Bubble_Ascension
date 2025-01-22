@@ -3,26 +3,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerJump : MonoBehaviour
 {
+    [SerializeField] private PlayerController _controller;
+    [SerializeField] private PlayerCrouch _crouch;
     [SerializeField] private Rigidbody2D _body;
-    [SerializeField] private LayerMask _mask;
     [SerializeField] private float _jumpForce = 5f;
 
-    public bool IsGrounded()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down, 0.6f, _mask);
-        if (hit.collider != null)
-        {
-            return true;
-        }
-        return false;
-    }
 
     public void OnJump(InputAction.CallbackContext callback)
     {
         if (callback.started)
         {
-            if (IsGrounded() == false)
+            if (_controller.IsGrounded() == false)
                 return;
+            _crouch.Crouched = false;
             _body.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
         }
     }
