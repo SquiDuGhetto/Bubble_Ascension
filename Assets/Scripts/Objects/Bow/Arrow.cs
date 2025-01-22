@@ -6,6 +6,12 @@ public class Arrow : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _damage = 1f;
     private bool _canMove = true;
+    private Collider2D _collider;
+
+    private void Start()
+    {
+        _collider = GetComponent<Collider2D>();
+    }
 
     private void FixedUpdate()
     {
@@ -22,6 +28,7 @@ public class Arrow : MonoBehaviour
         {
             hit.Hit(_damage);
         }
+        _collider.enabled = false;
         Destroy(gameObject, 2);
     }
 }

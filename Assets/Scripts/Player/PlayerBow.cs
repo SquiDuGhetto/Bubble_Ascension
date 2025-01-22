@@ -8,7 +8,19 @@ public class PlayerBow : MonoBehaviour
     [SerializeField] private Transform _aimPoint;
     [SerializeField] private float _shootCooldown = 1f;
     private Vector2 _aimDirection;
-    private bool _canShoot = true;
+    private bool _canShoot = false;
+
+    public void OnInventoryChange(PlayerInventory inventory)
+    {
+        if (inventory.HasItem("Bow"))
+        {
+            _canShoot = true;
+            _aimPoint.gameObject.SetActive(true);
+            return;
+        }
+        _canShoot = false;
+        _aimPoint.gameObject.SetActive(false);
+    }
 
     public void OnAim(InputAction.CallbackContext callback)
     {
