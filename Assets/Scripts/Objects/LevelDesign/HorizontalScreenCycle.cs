@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class VerticalScreenCycle : MonoBehaviour
+public class HorizontalScreenCycle : MonoBehaviour
 {
     [SerializeField] private Transform _teleportPosition;
 
@@ -9,8 +9,8 @@ public class VerticalScreenCycle : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Vector3 newPos = new();
-            newPos.x = other.transform.position.x;
-            newPos.y = _teleportPosition.position.y;
+            newPos.y = other.transform.position.y;
+            newPos.x = _teleportPosition.position.x;
             other.transform.position = newPos;
         }
     }
