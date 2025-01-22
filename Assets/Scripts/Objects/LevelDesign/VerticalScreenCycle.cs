@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScreenCycle : MonoBehaviour
+public class VerticalScreenCycle : MonoBehaviour
 {
     [SerializeField] private Transform _teleportPosition;
 
