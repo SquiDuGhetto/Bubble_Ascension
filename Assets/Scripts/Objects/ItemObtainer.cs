@@ -17,7 +17,9 @@ public class ItemObtainer : MonoBehaviour
             if (_inventory.HasItem(_item.ItemName))
                 return;
             if (_inventory.HasItemOfType(_item.ItemType) && _item.ItemType == ItemType.WEAPON)
-                return;
+            {
+                _inventory.RemoveAllItemOfType(ItemType.WEAPON);
+            }
 
             _inventory.AddItem(_item);
             // Instantiate();
