@@ -6,6 +6,11 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private PlayerController _controller;
     [SerializeField] private Rigidbody2D _body;
     [SerializeField] private float _jumpForce = 5f;
+    AudioManager audioManager;
+    private void Awake() 
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     public void OnJump(InputAction.CallbackContext callback)
     {
@@ -13,7 +18,7 @@ public class PlayerJump : MonoBehaviour
         {
             if (_controller.IsGrounded() == false)
                 return;
-
+            audioManager.PlaySFX(audioManager.Jump);
             _body.velocity = new Vector2(_body.velocity.x, _jumpForce);
         }
 
