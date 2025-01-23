@@ -9,6 +9,11 @@ public class PlayerHealth : MonoBehaviour, IHitable
     [SerializeField] private UnityEvent _onHit;
     private float _currentHealth;
     private bool _isInvincible = false;
+    AudioManager audioManager;
+    private void Awake() 
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
 
     private void Start()
@@ -47,6 +52,7 @@ public class PlayerHealth : MonoBehaviour, IHitable
 
     private void Death()
     {
+        audioManager.PlaySFX(audioManager.Death);
         GameManager.Instance.GameEnd(transform);
         Destroy(gameObject);
     }

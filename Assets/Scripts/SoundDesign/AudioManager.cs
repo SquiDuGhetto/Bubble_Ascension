@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip Jump;
     public AudioClip Death;
     public AudioClip Shoot; 
+    public AudioClip Sword;
     public void PlaySFX(AudioClip clip)
     {
         SFXSource.PlayOneShot(clip);

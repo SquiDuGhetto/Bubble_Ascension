@@ -10,6 +10,11 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private Transform _aimPoint;
     [SerializeField] private float _shootCooldown = 1f;
     private bool _canShoot = false;
+    AudioManager audioManager;
+    private void Awake() 
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     public void OnInventoryChange(PlayerInventory inventory)
     {
@@ -28,6 +33,7 @@ public class PlayerGun : MonoBehaviour
     {
         if (callback.started && _canShoot == true)
         {
+            audioManager.PlaySFX(audioManager.Shoot);
             Instantiate(_arrowPrefab, _aimPoint.position, transform.rotation);
             StartCoroutine(ShootCooldown());
         }
