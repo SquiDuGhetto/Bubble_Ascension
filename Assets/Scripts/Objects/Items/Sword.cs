@@ -9,6 +9,11 @@ public class Sword : MonoBehaviour
     [SerializeField] private float _duration = 1;
     private bool _canAttack = false;
     private AimPoint _aimPoint;
+     AudioManager audioManager;
+    private void Awake() 
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     private void Start()
     {
@@ -29,6 +34,7 @@ public class Sword : MonoBehaviour
     {
         if (callback.started && _canAttack == true)
         {
+            audioManager.PlaySFX(audioManager.Sword);
             _renderer.SetActive(true);
             StartCoroutine(AttackCooldown());
         }
