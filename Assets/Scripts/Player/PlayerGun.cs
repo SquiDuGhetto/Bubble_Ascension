@@ -2,11 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerBow : MonoBehaviour
+public class PlayerGun : MonoBehaviour
 {
     [SerializeField] private AimPoint _aim;
     [SerializeField] private string _itemName;
-    [SerializeField] private Arrow _arrowPrefab;
+    [SerializeField] private Bullet _arrowPrefab;
     [SerializeField] private Transform _aimPoint;
     [SerializeField] private float _shootCooldown = 1f;
     private bool _canShoot = false;

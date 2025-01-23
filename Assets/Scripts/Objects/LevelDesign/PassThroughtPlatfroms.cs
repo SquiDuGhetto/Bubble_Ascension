@@ -5,14 +5,13 @@ public class PassThroughtPlatfroms : MonoBehaviour
 {
     [SerializeField] private Collider2D _collider;
     private PlayerMovement _playerMovement;
-    private PlayerCrouch _playerCrouch;
     private bool _isPlayerOnThePlatform;
 
     private void Update()
     {
         if (_playerMovement != null)
         {
-            if (_playerMovement.GetMoveAxis().y < 0 && _playerCrouch.Crouched == true && _isPlayerOnThePlatform == true)
+            if (_playerMovement.GetMoveAxis().y < -0.7f && _isPlayerOnThePlatform == true)
             {
                 StartCoroutine(PlatformCollider());
             }
@@ -28,7 +27,7 @@ public class PassThroughtPlatfroms : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.collider.TryGetComponent<PlayerMovement>(out _playerMovement) && other.collider.TryGetComponent<PlayerCrouch>(out _playerCrouch))
+        if (other.collider.TryGetComponent<PlayerMovement>(out _playerMovement))
         {
             _isPlayerOnThePlatform = true;
         }

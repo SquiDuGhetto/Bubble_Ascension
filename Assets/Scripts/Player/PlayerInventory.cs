@@ -49,4 +49,16 @@ public class PlayerInventory : MonoBehaviour
         }
         return false;
     }
+
+    public void RemoveAllItemOfType(ItemType type)
+    {
+        for (int i = 0; i < _inventory.Count; i++)
+        {
+            if (_inventory[i].ItemType == type)
+            {
+                _inventory.Remove(_inventory[i]);
+                Debug.Log("Removed");
+            }
+        }
+    }
 }

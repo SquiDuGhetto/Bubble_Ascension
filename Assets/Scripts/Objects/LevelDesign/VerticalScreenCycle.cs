@@ -6,7 +6,7 @@ public class VerticalScreenCycle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.TryGetComponent<Rigidbody2D>(out Rigidbody2D body))
         {
             Vector3 newPos = new();
             newPos.x = other.transform.position.x;
