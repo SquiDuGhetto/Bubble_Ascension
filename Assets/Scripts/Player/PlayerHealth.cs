@@ -48,6 +48,7 @@ public class PlayerHealth : MonoBehaviour, IHitable
     private void Death()
     {
         GameManager.Instance.GameEnd(transform);
+        Destroy(gameObject);
     }
 
     public void SetInvincibility(bool isEnabled)

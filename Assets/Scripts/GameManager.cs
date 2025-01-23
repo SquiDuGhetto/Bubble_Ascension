@@ -4,13 +4,13 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     [SerializeField] private Transform _cameraTransform;
-    [SerializeField] private Transform _player1, _player2;
     [SerializeField] private List<Transform> _spawnPoints;
     [Header("UI")]
     [SerializeField] private TMP_Text _startText;
@@ -38,36 +38,61 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void RestartGame()
+    {
+        for (int i = 0; i < _players.Count; i++)
+        {
+            _players[i].enabled = false;
+        }
+
+        StartCoroutine(StartGame());
+    }
+
     public IEnumerator StartGame()
     {
-        _players[_players.Count - 1].transform.position = _spawnPoints[_players.Count - 1].position;
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < _players.Count; i++)
+        {
+            _players[i].enabled = false;
+            _players[i].transform.position = _spawnPoints[i].position;
+            _players[i].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
         for (int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(1);
             _startText.text = (3 - i).ToString();
         }
         yield return new WaitForSeconds(1);
-        _startText.text = "GO";
+        _startText.text = "FIGHT";
         yield return new WaitForSeconds(1);
-        _startText.DOFade(0, 1);
+        _startText.DOFade(0, 0.1f);
+
+        for (int i = 0; i < _players.Count; i++)
+        {
+            _players[i].enabled = true;
+        }
     }
 
     public void GameEnd(Transform deadPlayer)
     {
-        if (deadPlayer == _player1)
+        if (deadPlayer == _players[0])
         {
-            _cameraTransform.SetParent(_player2);
+            _cameraTransform.SetParent(_players[1].transform);
             Vector3 newPos = new Vector3(0, 0, -10);
             _cameraTransform.DOLocalMove(newPos, 1);
         }
         else
         {
-            _cameraTransform.SetParent(_player1);
+            _cameraTransform.SetParent(_players[0].transform);
             Vector3 newPos = new Vector3(0, 0, -10);
             _cameraTransform.DOLocalMove(newPos, 1);
         }
 
         Camera.main.DOOrthoSize(2, 1);
+    }
 
+    public void ToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

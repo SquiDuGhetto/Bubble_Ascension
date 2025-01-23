@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 3110132174924080164}
   - component: {fileID: 1602112543789309846}
   - component: {fileID: 4571282551766550578}
-  - component: {fileID: 261299376762016837}
   m_Layer: 0
   m_Name: Player_Pivot
   m_TagString: Player
@@ -253,7 +252,7 @@ MonoBehaviour:
     m_ActionId: 29b9bd11-3f1d-4edb-9f43-fb661242b6dd
     m_ActionName: CharacterSelection/Return
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: GamePad
   m_DefaultActionMap: InGame
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -300,12 +299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab92d173278d53408e3cf792ab5b69c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerInput: {fileID: 2005414097689257240}
   _controller: {fileID: 8801131165623205427}
-  _crouch: {fileID: 261299376762016837}
   _body: {fileID: 6106916974906188977}
   _jumpForce: 8
-  _index: 0
 --- !u!114 &1602112543789309846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,36 +386,6 @@ MonoBehaviour:
       - m_Target: {fileID: 3410679584171529171}
         m_TargetAssemblyTypeName: PlayerGun, Assembly-CSharp
         m_MethodName: OnInventoryChange
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &261299376762016837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 495570982479635973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eafaaf417fd4064e97bb056bccb1e26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _controller: {fileID: 8801131165623205427}
-  _movement: {fileID: 8721708082390414371}
-  _crouchScale: {x: 0, y: 0, z: 0}
-  _onCrouchValueChange:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4326612965780942981}
-        m_TargetAssemblyTypeName: PlayerRenderer, Assembly-CSharp
-        m_MethodName: Crouch
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
