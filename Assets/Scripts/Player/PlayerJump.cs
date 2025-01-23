@@ -7,7 +7,7 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private Rigidbody2D _body;
     [SerializeField] private float _jumpForce = 5f;
     AudioManager audioManager;
-    private void Awake() 
+    private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }

@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D _playerBody;
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _maxMoveSpeed = 5;
+    [SerializeField] private Transform _sprite;
+    // [SerializeField] private Playersprite _sprite;
     private Vector2 _moveAxis;
     private float _patinsMove = 1;
 
@@ -28,6 +30,15 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 direction = _moveAxis.normalized;
             direction.y = 0;
+
+            if (direction.x < 0f)
+            {
+                _sprite.localScale = new Vector2(-1f, _sprite.localScale.y);
+            }
+            else
+            {
+                _sprite.localScale = new Vector2(1f, _sprite.localScale.y);
+            }
 
             _playerBody.velocity += direction * _moveSpeed * Time.fixedDeltaTime;
             _playerBody.velocity = new(Mathf.Clamp(_playerBody.velocity.x, -_maxMoveSpeed, _maxMoveSpeed), _playerBody.velocity.y);
