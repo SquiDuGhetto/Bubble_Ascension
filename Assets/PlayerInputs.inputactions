@@ -259,17 +259,5 @@
             ]
         }
     ],
-    "controlSchemes": [
-        {
-            "name": "GamePad",
-            "bindingGroup": "GamePad",
-            "devices": [
-                {
-                    "devicePath": "<Gamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        }
-    ]
+    "controlSchemes": []
 }
