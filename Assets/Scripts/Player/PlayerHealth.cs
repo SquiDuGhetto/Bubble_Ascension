@@ -1,6 +1,6 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour, IHitable
 {
@@ -28,7 +28,6 @@ public class PlayerHealth : MonoBehaviour, IHitable
         if (_currentHealth <= 0)
         {
             Death();
-
         }
 
         _onHit.Invoke();
@@ -48,7 +47,7 @@ public class PlayerHealth : MonoBehaviour, IHitable
 
     private void Death()
     {
-
+        GameManager.Instance.GameEnd(transform);
     }
 
     public void SetInvincibility(bool isEnabled)

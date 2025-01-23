@@ -4,10 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerJump : MonoBehaviour
 {
     [SerializeField] private PlayerController _controller;
-    [SerializeField] private PlayerCrouch _crouch;
     [SerializeField] private Rigidbody2D _body;
     [SerializeField] private float _jumpForce = 5f;
-
 
     public void OnJump(InputAction.CallbackContext callback)
     {
@@ -15,8 +13,13 @@ public class PlayerJump : MonoBehaviour
         {
             if (_controller.IsGrounded() == false)
                 return;
-            _crouch.Crouched = false;
-            _body.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+
+            _body.velocity = new Vector2(_body.velocity.x, _jumpForce);
+        }
+
+        if (callback.canceled)
+        {
+            _body.velocity = new Vector2(_body.velocity.x, _body.velocity.y * 0.25f);
         }
     }
 
