@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartGame()
     {
+        _startText.text = "Starting in";
         yield return new WaitForSeconds(1);
         for (int i = 0; i < _players.Count; i++)
         {
@@ -78,21 +79,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GameEnd(Transform deadPlayer)
+    public void GameEnd(PlayerInput deadPlayer)
     {
         if (deadPlayer == _players[0])
-        {
-            _cameraTransform.SetParent(_players[0].transform);
-            Vector3 newPos = new Vector3(0, 0, -10);
-            _cameraTransform.DOLocalMove(newPos, 1);
-            _winText.text = "P1 wins";
-        }
-        else
         {
             _cameraTransform.SetParent(_players[1].transform);
             Vector3 newPos = new Vector3(0, 0, -10);
             _cameraTransform.DOLocalMove(newPos, 1);
             _winText.text = "P2 wins";
+        }
+        else
+        {
+            _cameraTransform.SetParent(_players[0].transform);
+            Vector3 newPos = new Vector3(0, 0, -10);
+            _cameraTransform.DOLocalMove(newPos, 1);
+            _winText.text = "P1 wins";
         }
 
         Camera.main.DOOrthoSize(2, 1);

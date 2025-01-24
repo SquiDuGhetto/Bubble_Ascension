@@ -1,17 +1,26 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Playersprite : MonoBehaviour
 {
-    [SerializeField] private List<Animator> _characters;
-    [SerializeField] private Vector2 _position;
+    [Serializable]
+    public struct CharaterList
+    {
+        public Animator prefab;
+        public Vector2 _positionCorrection;
+    }
 
-    public Animator CharAnimator { get; private set; }
+    [SerializeField] private List<CharaterList> _characters = new();
+    private Animator _animator;
+
+    public Animator CharAnimator { get { return _animator; } set { _animator = value; } }
 
     private void Start()
     {
-        CharAnimator = _characters.GetRandom();
-        Instantiate(CharAnimator, _position, Quaternion.identity, transform);
+        int index = UnityEngine.Random.Range(0, _characters.Count);
+        Animator clone = Instantiate(_characters[index].prefab, transform);
+        clone.transform.localPosition = _characters[index]._positionCorrection;
+        CharAnimator = GetComponentInChildren<Animator>();
     }
 }
