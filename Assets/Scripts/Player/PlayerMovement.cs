@@ -7,20 +7,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D _playerBody;
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _maxMoveSpeed = 5;
+    [SerializeField] private Transform _renderer;
+    [SerializeField] private Playersprite _sprite;
     private Vector2 _moveAxis;
-    private float _patinsMove = 1;
 
     public bool CanMove { get { return enabled; } set { enabled = value; } }
-
-    public void OnInventoryChange(PlayerInventory inventory)
-    {
-        if (inventory.HasItem("Patins"))
-        {
-            _patinsMove = 1.5f;
-            return;
-        }
-        _patinsMove = 1f;
-    }
 
     private void FixedUpdate()
     {
@@ -29,7 +20,28 @@ public class PlayerMovement : MonoBehaviour
             Vector2 direction = _moveAxis.normalized;
             direction.y = 0;
 
-            _playerBody.velocity += direction * _moveSpeed * Time.fixedDeltaTime;
+            if (direction.x < 0f)
+                _renderer.localScale = new Vector2(-1f, _renderer.localScale.y);
+            else
+                _renderer.localScale = new Vector2(1f, _renderer.localScale.y);
+
+            if (_controller.IsGrounded())
+            {
+                _sprite.CharAnimator.SetBool("IsJumping", false);
+
+                if (_moveAxis.x != 0)
+                    _sprite.CharAnimator.SetBool("IsRunning", true);
+                else
+                    _sprite.CharAnimator.SetBool("IsRunning", false);
+
+            }
+            else
+            {
+                _sprite.CharAnimator.SetBool("IsRunning", false);
+                _sprite.CharAnimator.SetBool("IsJumping", true);
+            }
+
+            _playerBody.velocity += _moveSpeed * Time.fixedDeltaTime * direction;
             _playerBody.velocity = new(Mathf.Clamp(_playerBody.velocity.x, -_maxMoveSpeed, _maxMoveSpeed), _playerBody.velocity.y);
         }
     }
